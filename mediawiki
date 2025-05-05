@@ -1,0 +1,25 @@
+services:
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: P@ssw0rd
+      MYSQL_DATABASE: mediawiki
+      MYSQL_USER: wiki
+      MYSQL_PASSWORD: P@ssw0rd
+    volumes: [ mariadb_data:/var/lib/mysql ]
+  wiki:
+    image: mediawiki
+    container_name: wiki
+    restart: always
+    environment:
+      MEDIAWIKI_DB_HOST: mariadb
+      MEDIAWIKI_DB_USER: wiki
+      MEDIAWIKI_DB_PASSWORD: P@ssw0rd
+      MEDIAWIKI_DB_NAME: mediawiki
+    ports:
+      - "8080:80"
+    #volumes: [ ~/LocalSettings.php:/var/www/html/LocalSettings.php ]
+volumes:
+  mariadb_data:
