@@ -1,15 +1,17 @@
-Apt-get install python-module-json(CLI-CLI-CLI)
-Apt-get update & apt-get install ansible 
-Mkdir -p /etc/ansible
+apt-get install python-module-json(CLI-CLI-CLI)
+apt-get update & apt-get install ansible 
+mkdir -p /etc/ansible
 
-Nano /etc/hosts
+cd /etc/ansible
+Nano hosts
 hq-srv ansible_host=sshuser@192.168.1.10 ansible_port=2024
 hq-cli ansible_host=sshuser@192.168.2.12 ansible_port=2024
 hq-rtr ansible_host=net_admin@192.168.1.1 ansible_port=2024
 br-rtr ansible_host=net_admin@192.168.3.1 ansible_port=2024
 
 Nano /etc/ansible/ansible.cfg
-Ansible_python_interpreter=/usr/bin/python3
+ansible_python_interpreter=/usr/bin/python3
+host_key_checking = false 
 
 Ssh-keygen -t rsa
 ssh-copy-id -p 2024 net_admin@192.168.1.1
