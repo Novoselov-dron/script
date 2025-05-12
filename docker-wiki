@@ -1,3 +1,17 @@
+на BR-SRV
+apt-get update 
+apt-get install docker-engine docker-compose
+systemctl start docker (чекнуть, чтобы работала кароче)
+docker pull mediawiki 
+docker pull mariadb
+cd /root – touch wiki.yml
+docker compose -f /root/wiki.yml up -d
+
+
+
+
+
+
 services:
   mariadb:
     image: mariadb
