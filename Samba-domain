@@ -1,0 +1,22 @@
+apt-get update
+apt-get install task-samba-dc
+rm -rf /etc/samba/smb.conf
+
+nano /etc/resolv.conf
+nameserver 127.0.0.1
+
+nano /etc/hosts
+192.168.3.10  br-srv.au-team.irpo
+
+server=/au-team.irpo/192.168.3.10
+
+samba-tool domain provision 
+mv -f /var/lib/samba/private/krb5.conf /etc/krb5.conf
+systemctl start samba
+samba-tool user add user1.hq P@ssw0rd
+samba-tool user add user2.hq P@ssw0rd
+samba-tool user add user3.hq P@ssw0rd
+samba-tool user add user4.hq P@ssw0rd
+samba-tool user add user5.hq P@ssw0rd
+samba-tool group add hq
+samba-tool group addmembers hq user1.hq,user2.hq,user3.hq,user4.hq,user5.hq
