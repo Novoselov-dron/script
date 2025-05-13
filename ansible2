@@ -1,0 +1,25 @@
+mkdir /etc/ansible/inventory.yml
+
+mkdir etc/ansible/inventory.yml
+
+---
+- name: Инвентаризация машин HQ-SRV и HQ-CLI
+  hosts:
+	- HQ-SRV
+	- HQ-CLI
+  gather_facts: yes
+  tasks:
+	- name: Создать отчёт с информацией рабочем месте
+  	delegate_to: localhost
+  	copy:
+    	dest: "/etc/ansible/PC_INFO/{{ ansible_hostname }}.yml"
+    	content: |
+      	---
+      	Имя компьютера: "{{ ansible_hostname }}"
+      	IP-адрес компьютера: "{{ ansible_default_ipv4.address }}"
+
+
+ansible-playbook /etc/ansible/inventory.yml
+ls -la /etc/ansible/PC_INFO
+cat /etc/ansible/PC_INFO/hq-cli.yml
+cat /etc/ansible/PC_INFO/hq-srv.yml
