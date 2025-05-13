@@ -1,0 +1,9 @@
+apt-get update
+apt-get install rsyslog
+
+раскоментировать module/input
+$template RemoteLogs, "/opt//%HOSTNAME%/rsyslog.txt"
+*.* ?RemoteLogs
+& stop
+
+Заходим на HQ-RTR
