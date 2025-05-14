@@ -16,3 +16,6 @@ fi
 username=”${firstName,,}.${lastName,,}”
 sudo samba-tool user add “$username” 123qweR%
 done < “$csv_file”
+
+chmod +x /opt/import
+bach /opt/import
