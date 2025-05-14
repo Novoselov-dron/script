@@ -18,7 +18,7 @@ chown apache2:apache2 /var/www/html
 chown apache2:apache2 /var/www/moodledata
 
 mcedit /etc/php/8.2/apache2-mod_php/php.ini
-max_vars_input
+max_input_vars
 
 cd /var/www/html
 rm index.html
