@@ -5,9 +5,6 @@ systemctl start docker (чекнуть, чтобы работала кароче
 docker pull mediawiki 
 docker pull mariadb
 cd /root – touch wiki.yml
-docker compose -f /root/wiki.yml up -d
-
-scp -P 2024 /home/user/Загрузки/LocalSettings.php sshuser@192.168.3.10:/home/sshuser
 
 services:
   mariadb:
@@ -15,10 +12,10 @@ services:
     container_name: mariadb
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: P@ssw0rd
+      MYSQL_ROOT_PASSWORD: 123qweR%
       MYSQL_DATABASE: mediawiki
       MYSQL_USER: wiki
-      MYSQL_PASSWORD: P@ssword
+      MYSQL_PASSWORD: WikiP@ssw0rd
     volumes: [ mariadb_data:/var/lib/mysql ]
   wiki:
     image: mediawiki
@@ -27,13 +24,17 @@ services:
     environment:
       MEDIAWIKI_DB_HOST: mariadb
       MEDIAWIKI_DB_USER: wiki
-      MEDIAWIKI_DB_PASSWORD: P@ssw0rd
+      MEDIAWIKI_DB_PASSWORD: WikiP@ssw0rd
       MEDIAWIKI_DB_NAME: mediawiki
     ports:
       - "8080:80"
-    #volumes: [ ~/LocalSettings.php:/var/www/html/LocalSettings.php ]
+    #volumes: [ /home/user/mediawiki/LocalSettings.php:/var/www/html/LocalSettings.php ]
 volumes:
   mariadb_data:
+
+docker compose -f /root/wiki.yml up -d
+
+scp -P 2024 /home/user/Загрузки/LocalSettings.php sshuser@192.168.3.10:/home/sshuser
 
 
 mkdir /root/mediawiki
